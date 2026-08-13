@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Students | Student Complaint & Profile Management Portal</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
+  <!-- Portal styles -->
+  <link rel="stylesheet" href="/css/Manage-students.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Loader
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-ring"></div>
+  </div> -->
+
+  <!-- LOADER -->
+<div id="loader">
+  <div class="loader-inner">
+    <span class="loader-bracket">&lt;</span>
+    <span class="loader-dot"></span>
+    <span class="loader-bracket">/&gt;</span>
+  </div>
+</div>
+
+  <div class="app-shell">
+
+    <!-- Sidebar overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark">SC</div>
+        <div class="brand-text">
+          Admin Panel
+          <small>Complaint & Profile System</small>
+        </div>
+        <button class="sidebar-collapse-btn d-none d-lg-flex" id="sidebarCollapseBtn" aria-label="Collapse sidebar">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Overview</div>
+        <a href="admin-dashboard.html" class="nav-link"><i class="bi bi-grid-1x2"></i> <span>Dashboard</span></a>
+
+        <div class="nav-section-label">Management</div>
+        <a href="manage-students.html" class="nav-link active"><i class="bi bi-people"></i> <span>Manage Students</span></a>
+        <a href="manage-complaints.html" class="nav-link"><i class="bi bi-card-checklist"></i> <span>Manage Complaints</span></a>
+        <a href="reports.html" class="nav-link"><i class="bi bi-bar-chart-line"></i> <span>Reports</span></a>
+
+        <div class="nav-section-label">System</div>
+        <a href="notifications.html" class="nav-link"><i class="bi bi-bell"></i> <span>Notifications</span></a>
+        <a href="settings.html" class="nav-link"><i class="bi bi-gear"></i> <span>Settings</span></a>
+        <a href="admin-login.html" class="nav-link"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></a>
+      </nav>
+
+      <div class="sidebar-foot">
+        &copy; 2026 Student Complaint & Profile Management Portal
+      </div>
+    </aside>
+
+    <!-- Main area -->
+    <div class="main-area">
+
+      <!-- Topbar -->
+      <header class="topbar">
+        <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="Toggle menu">
+          <i class="bi bi-list"></i>
+        </button>
+
+        <div class="page-title">
+          Manage Students
+          <small>View, add, edit, and remove student records</small>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle dark mode">
+            <i class="bi bi-moon-stars"></i>
+          </button>
+
+          <button class="icon-btn" aria-label="Notifications">
+            <i class="bi bi-bell"></i>
+            <span class="badge-dot"></span>
+          </button>
+
+          <div class="dropdown">
+            <button class="user-chip dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+              <span>
+                <span class="chip-name d-block">Solace .C. </span>
+                <span class="chip-role">Administrator</span>
+              </span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+              <li><a class="dropdown-item" href="settings.html"><i class="bi bi-person me-2"></i>My Profile</a></li>
+              <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear me-2"></i>Settings</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item text-danger" href="admin-login.html"><i class="bi bi-box-arrow-right me-2"></i>Log Out</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="content-area">
+
+        <!-- Breadcrumb + page action -->
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0" style="font-size: 0.85rem;">
+              <li class="breadcrumb-item"><a href="admin-dashboard.html" class="text-decoration-none">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Manage Students</li>
+            </ol>
+          </nav>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStudentModal">
+            <i class="bi bi-person-plus me-1"></i> Add Student
+          </button>
+        </div>
+
+        <!-- Table card -->
+        <div class="card reveal-on-scroll">
+
+          <!-- Toolbar: search + filter -->
+          <div class="table-toolbar">
+            <div class="search-bar">
+              <i class="bi bi-search"></i>
+              <input type="text" id="studentSearchInput" placeholder="Search by name, matric no, or email..." />
+            </div>
+
+            <div class="dropdown">
+              <button class="filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                <i class="bi bi-funnel"></i> Filter
+                <span class="filter-count" id="studentFilterCount" style="display:none;">0</span>
+              </button>
+              <div class="dropdown-menu filter-menu shadow-sm" id="studentFilterForm">
+                <div class="mb-3">
+                  <label class="form-label d-block">Department</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Computer Science" name="deptFilter" id="fDeptCS">
+                    <label class="form-check-label" for="fDeptCS" style="font-size:0.85rem;">Computer Science</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Electrical Engineering" name="deptFilter" id="fDeptEE">
+                    <label class="form-check-label" for="fDeptEE" style="font-size:0.85rem;">Electrical Engineering</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Business Administration" name="deptFilter" id="fDeptBA">
+                    <label class="form-check-label" for="fDeptBA" style="font-size:0.85rem;">Business Administration</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Mathematics" name="deptFilter" id="fDeptMath">
+                    <label class="form-check-label" for="fDeptMath" style="font-size:0.85rem;">Mathematics</label>
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <label class="form-label d-block">Status</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Active" name="statusFilter" id="fStatusActive">
+                    <label class="form-check-label" for="fStatusActive" style="font-size:0.85rem;">Active</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Inactive" name="statusFilter" id="fStatusInactive">
+                    <label class="form-check-label" for="fStatusInactive" style="font-size:0.85rem;">Inactive</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Suspended" name="statusFilter" id="fStatusSuspended">
+                    <label class="form-check-label" for="fStatusSuspended" style="font-size:0.85rem;">Suspended</label>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary w-100" id="clearStudentFilters">Clear filters</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="table-responsive">
+            <table class="table table-clean align-middle mb-0" id="studentsTable">
+              <thead>
+                <tr>
+                  <th class="ps-4">Student ID</th>
+                  <th>Full Name</th>
+                  <th>Matric Number</th>
+                  <th>Department</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                  <th class="pe-4 text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-department="Computer Science" data-status="Active">
+                  <td class="ps-4">STU-1001</td>
+                  <td>
+                    <div class="student-cell">
+                      <div class="avatar-initials">AO</div>
+                      <div><div class="student-name">Amara Okoye</div></div>
+                    </div>
+                  </td>
+                  <td>CS/2022/0142</td>
+                  <td>Computer Science</td>
+                  <td>amara.okoye@university.edu</td>
+                  <td><span class="status-badge status-active">Active</span></td>
+                  <td class="pe-4">
+                    <div class="row-actions">
+                      <button type="button" class="btn-icon btn-edit" title="Edit"><i class="bi bi-pencil"></i></button>
+                      <button type="button" class="btn-icon btn-delete" title="Delete"><i class="bi bi-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-department="Electrical Engineering" data-status="Active">
+                  <td class="ps-4">STU-1002</td>
+                  <td>
+                    <div class="student-cell">
+                      <div class="avatar-initials">LC</div>
+                      <div><div class="student-name">Liam Chen</div></div>
+                    </div>
+                  </td>
+                  <td>EE/2021/0087</td>
+                  <td>Electrical Engineering</td>
+                  <td>liam.chen@university.edu</td>
+                  <td><span class="status-badge status-active">Active</span></td>
+                  <td class="pe-4">
+                    <div class="row-actions">
+                      <button type="button" class="btn-icon btn-edit" title="Edit"><i class="bi bi-pencil"></i></button>
+                      <button type="button" class="btn-icon btn-delete" title="Delete"><i class="bi bi-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-department="Business Administration" data-status="Suspended">
+                  <td class="ps-4">STU-1003</td>
+                  <td>
+                    <div class="student-cell">
+                      <div class="avatar-initials">PN</div>
+                      <div><div class="student-name">Priya Nair</div></div>
+                    </div>
+                  </td>
+                  <td>BA/2023/0219</td>
+                  <td>Business Administration</td>
+                  <td>priya.nair@university.edu</td>
+                  <td><span class="status-badge status-suspended">Suspended</span></td>
+                  <td class="pe-4">
+                    <div class="row-actions">
+                      <button type="button" class="btn-icon btn-edit" title="Edit"><i class="bi bi-pencil"></i></button>
+                      <button type="button" class="btn-icon btn-delete" title="Delete"><i class="bi bi-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-department="Mathematics" data-status="Inactive">
+                  <td class="ps-4">STU-1004</td>
+                  <td>
+                    <div class="student-cell">
+                      <div class="avatar-initials">DA</div>
+                      <div><div class="student-name">Diego Alvarez</div></div>
+                    </div>
+                  </td>
+                  <td>MTH/2020/0056</td>
+                  <td>Mathematics</td>
+                  <td>diego.alvarez@university.edu</td>
+                  <td><span class="status-badge status-inactive">Inactive</span></td>
+                  <td class="pe-4">
+                    <div class="row-actions">
+                      <button type="button" class="btn-icon btn-edit" title="Edit"><i class="bi bi-pencil"></i></button>
+                      <button type="button" class="btn-icon btn-delete" title="Delete"><i class="bi bi-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-department="Computer Science" data-status="Active">
+                  <td class="ps-4">STU-1005</td>
+                  <td>
+                    <div class="student-cell">
+                      <div class="avatar-initials">SB</div>
+                      <div><div class="student-name">Sarah Blake</div></div>
+                    </div>
+                  </td>
+                  <td>CS/2022/0198</td>
+                  <td>Computer Science</td>
+                  <td>sarah.blake@university.edu</td>
+                  <td><span class="status-badge status-active">Active</span></td>
+                  <td class="pe-4">
+                    <div class="row-actions">
+                      <button type="button" class="btn-icon btn-edit" title="Edit"><i class="bi bi-pencil"></i></button>
+                      <button type="button" class="btn-icon btn-delete" title="Delete"><i class="bi bi-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-department="Electrical Engineering" data-status="Active">
+                  <td class="ps-4">STU-1006</td>
+                  <td>
+                    <div class="student-cell">
+                      <div class="avatar-initials">TK</div>
+                      <div><div class="student-name">Tariq Khan</div></div>
+                    </div>
+                  </td>
+                  <td>EE/2023/0301</td>
+                  <td>Electrical Engineering</td>
+                  <td>tariq.khan@university.edu</td>
+                  <td><span class="status-badge status-active">Active</span></td>
+                  <td class="pe-4">
+                    <div class="row-actions">
+                      <button type="button" class="btn-icon btn-edit" title="Edit"><i class="bi bi-pencil"></i></button>
+                      <button type="button" class="btn-icon btn-delete" title="Delete"><i class="bi bi-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Table footer: result count + pagination -->
+          <div class="table-footer">
+            <div class="result-count" id="studentResultCount">Showing 6 of 6 students</div>
+            <nav aria-label="Students pagination">
+              <ul class="pagination mb-0" id="studentsPagination">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" data-page="prev" aria-label="Previous"><i class="bi bi-chevron-left"></i></a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#" data-page="1">1</a></li>
+                <li class="page-item"><a class="page-link" href="#" data-page="2">2</a></li>
+                <li class="page-item"><a class="page-link" href="#" data-page="3">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#" data-page="next" aria-label="Next"><i class="bi bi-chevron-right"></i></a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer-note text-center">
+        &copy; 2026 Student Complaint & Profile Management Portal. All rights reserved.
+      </footer>
+    </div>
+  </div>
+
+  <!-- ============== Add Student Modal ============== -->
+  <div class="modal fade" id="addStudentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form id="addStudentForm" novalidate>
+          <div class="modal-header">
+            <h5 class="modal-title"><i class="bi bi-person-plus me-2"></i>Add Student</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="addStudentName" class="form-label">Full Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="addStudentName" required />
+              <div class="invalid-feedback">Please enter the student's full name.</div>
+            </div>
+            <div class="mb-3">
+              <label for="addStudentMatric" class="form-label">Matric Number <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="addStudentMatric" placeholder="e.g. CS/2024/0001" required />
+              <div class="invalid-feedback">Please enter a matric number.</div>
+            </div>
+            <div class="mb-3">
+              <label for="addStudentDept" class="form-label">Department <span class="text-danger">*</span></label>
+              <select class="form-select" id="addStudentDept" required>
+                <option value="" selected disabled>Select department</option>
+                <option>Computer Science</option>
+                <option>Electrical Engineering</option>
+                <option>Business Administration</option>
+                <option>Mathematics</option>
+              </select>
+              <div class="invalid-feedback">Please select a department.</div>
+            </div>
+            <div class="mb-1">
+              <label for="addStudentEmail" class="form-label">Email <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" id="addStudentEmail" placeholder="student@university.edu" required />
+              <div class="invalid-feedback">Please enter a valid email address.</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check2 me-1"></i>Add Student</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== Edit Student Modal ============== -->
+  <div class="modal fade" id="editStudentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form id="editStudentForm" novalidate>
+          <div class="modal-header">
+            <h5 class="modal-title"><i class="bi bi-pencil-square me-2"></i>Edit Student</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Student ID</label>
+              <input type="text" class="form-control" id="editStudentId" disabled />
+            </div>
+            <div class="mb-3">
+              <label for="editStudentName" class="form-label">Full Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="editStudentName" required />
+              <div class="invalid-feedback">Please enter the student's full name.</div>
+            </div>
+            <div class="mb-3">
+              <label for="editStudentMatric" class="form-label">Matric Number <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="editStudentMatric" required />
+              <div class="invalid-feedback">Please enter a matric number.</div>
+            </div>
+            <div class="mb-3">
+              <label for="editStudentDept" class="form-label">Department <span class="text-danger">*</span></label>
+              <select class="form-select" id="editStudentDept" required>
+                <option>Computer Science</option>
+                <option>Electrical Engineering</option>
+                <option>Business Administration</option>
+                <option>Mathematics</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="editStudentEmail" class="form-label">Email <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" id="editStudentEmail" required />
+              <div class="invalid-feedback">Please enter a valid email address.</div>
+            </div>
+            <div class="mb-1">
+              <label for="editStudentStatus" class="form-label">Status</label>
+              <select class="form-select" id="editStudentStatus">
+                <option>Active</option>
+                <option>Inactive</option>
+                <option>Suspended</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check2 me-1"></i>Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== Delete Confirmation Modal ============== -->
+  <div class="modal fade" id="deleteStudentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center pt-4">
+          <div class="delete-modal-icon"><i class="bi bi-exclamation-triangle"></i></div>
+          <h5 class="fw-semibold mb-2">Delete this student?</h5>
+          <p class="text-muted mb-0">
+            You're about to remove <strong id="deleteStudentName">this student</strong> from the system.
+            This action cannot be undone.
+          </p>
+        </div>
+        <div class="modal-footer justify-content-center border-top-0 pb-4">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteStudentBtn"><i class="bi bi-trash me-1"></i>Delete Student</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Portal script -->
+  <script src="/js/manage-students.js"></script>
+  <script src="/js/script-3.js"></script>
+  <script src="/js/script.js"></script>
+  <script src="/js/complaint-history.js"></script>
+</body>
+</html>

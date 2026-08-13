@@ -1,0 +1,136 @@
+/* ==========================================================================
+   responsive.css — breakpoint overrides
+   ========================================================================== */
+
+/* Tablet and below: sidebar becomes an off-canvas drawer */
+@media (max-width: 991.98px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
+
+  .main-area {
+    margin-left: 0;
+  }
+
+  .menu-toggle-btn {
+    display: flex;
+  }
+
+  .topbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .content-area {
+    padding: 1.25rem;
+  }
+}
+
+/* Small phones */
+@media (max-width: 575.98px) {
+  .topbar .page-title {
+    font-size: 0.92rem;
+  }
+
+  .topbar .page-title small {
+    display: none;
+  }
+
+  .user-chip .chip-name,
+  .user-chip .chip-role {
+    display: none;
+  }
+
+  .user-chip {
+    padding: 0.3rem;
+  }
+
+  .priority-group {
+    flex-direction: column;
+  }
+
+  .priority-pill {
+    min-width: 100%;
+  }
+
+  .content-area {
+    padding: 1rem;
+  }
+
+  .card-header-clean {
+    padding: 1.1rem 1.1rem 0.4rem;
+  }
+
+  .dropzone {
+    padding: 1.4rem 0.85rem;
+  }
+}
+
+/* Large desktop: slightly roomier content */
+@media (min-width: 1400px) {
+  .content-area {
+    padding: 2rem 2.5rem;
+  }
+}
+
+/* Admin dashboard: search bar + collapse button responsiveness */
+@media (max-width: 991.98px) {
+  .sidebar.collapsed ~ .main-area {
+    margin-left: 0;
+  }
+
+  .sidebar-collapse-btn {
+    display: none;
+  }
+
+  .search-bar input {
+    width: 170px;
+  }
+
+  .search-bar input:focus {
+    width: 190px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .search-bar {
+    display: none;
+  }
+
+  .stat-card .stat-value {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .theme-toggle {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+  }
+
+  .section-card-header {
+    padding: 1.1rem 1.1rem 0.2rem;
+  }
+
+  .table-clean {
+    font-size: 0.8rem;
+  }
+
+  .table-toolbar {
+    padding: 1.1rem 1.1rem 0.8rem;
+  }
+
+  .table-footer {
+    padding: 1rem 1.1rem 1.2rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .table-footer .pagination {
+    align-self: center;
+  }
+}

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complaint History | Software &amp; Web Development Student Portal</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet" href="/css/complaint-history.css">
+<link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body class="dash-body">
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-inner">
+    <span class="loader-bracket">&lt;</span>
+    <span class="loader-dot"></span>
+    <span class="loader-bracket">/&gt;</span>
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="app-sidebar" id="appSidebar">
+    <div class="sidebar-brand">
+      <a href="dashboard.html" class="navbar-brand">
+        <span class="brand-mark">&lt;SWD<span class="brand-accent">/</span>&gt;</span>
+        <span class="brand-text">Student Portal</span>
+      </a>
+      <button class="sidebar-close d-lg-none" id="sidebarClose"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">JD</div>
+      <div><strong>Jane Doe</strong><span>CSC/2021/045</span></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html"        class="sidebar-link"><i class="bi bi-grid-1x2-fill"></i><span>Dashboard</span></a>
+      <a href="edit-profile.html"     class="sidebar-link"><i class="bi bi-person-vcard"></i><span>Edit Profile</span></a>
+      <a href="submit-complaint.html" class="sidebar-link"><i class="bi bi-send-plus"></i><span>Submit Complaint</span></a>
+      <a href="complaint-history.html" class="sidebar-link active"><i class="bi bi-clock-history"></i><span>Complaint History</span></a>
+      <a href="notifications.html"    class="sidebar-link">
+        <i class="bi bi-bell"></i><span>Notifications</span>
+        <span class="badge rounded-pill text-bg-primary ms-auto">3</span>
+      </a>
+      <a href="settings.html"         class="sidebar-link"><i class="bi bi-gear"></i><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="login.html" class="sidebar-link logout-link"><i class="bi bi-box-arrow-right"></i><span>Logout</span></a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="app-main">
+
+    <!-- TOPBAR -->
+    <header class="app-topbar">
+      <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar"><i class="bi bi-list"></i></button>
+      <div class="topbar-search d-none d-md-flex">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Search complaints, students...">
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" id="darkModeToggle" aria-label="Toggle dark mode"><i class="bi bi-moon-stars"></i></button>
+        <div class="dropdown">
+          <button class="icon-btn position-relative" data-bs-toggle="dropdown" aria-label="Notifications">
+            <i class="bi bi-bell"></i><span class="notif-dot"></span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end notif-dropdown">
+            <div class="notif-dropdown-header">
+              <strong>Notifications</strong><span class="badge text-bg-primary">3 new</span>
+            </div>
+            <a href="#" class="notif-item">
+              <i class="bi bi-check2-circle text-success"></i>
+              <div><strong>Complaint #2291 resolved</strong><span>2 hours ago</span></div>
+            </a>
+            <a href="notifications.html" class="notif-dropdown-footer">View all notifications</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="profile-btn" data-bs-toggle="dropdown">
+            <span class="sidebar-avatar sidebar-avatar-sm">JD</span>
+            <span class="d-none d-md-inline">Jane Doe</span>
+            <i class="bi bi-chevron-down small"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="edit-profile.html"><i class="bi bi-person me-2"></i>My Profile</a></li>
+            <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear me-2"></i>Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="login.html"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <main class="app-content">
+
+      <!-- PAGE HEADER -->
+      <div class="page-header-row reveal">
+        <div>
+          <span class="form-eyebrow">Records</span>
+          <h2>Complaint History</h2>
+          <p class="text-muted mb-0">A full log of every ticket you've filed — searchable, filterable, and sortable.</p>
+        </div>
+        <a href="submit-complaint.html" class="btn btn-primary">
+          <i class="bi bi-plus-lg me-1"></i> New Complaint
+        </a>
+      </div>
+
+      <!-- STAT STRIP -->
+      <div class="stat-strip reveal">
+        <div class="strip-item">
+          <span class="strip-num" id="totalCount">14</span>
+          <span class="strip-label">Total</span>
+        </div>
+        <div class="strip-divider"></div>
+        <div class="strip-item">
+          <span class="strip-num text-warning" id="pendingCount">3</span>
+          <span class="strip-label">Pending</span>
+        </div>
+        <div class="strip-divider"></div>
+        <div class="strip-item">
+          <span class="strip-num text-info" id="reviewCount">2</span>
+          <span class="strip-label">In Review</span>
+        </div>
+        <div class="strip-divider"></div>
+        <div class="strip-item">
+          <span class="strip-num text-success" id="resolvedCount">8</span>
+          <span class="strip-label">Resolved</span>
+        </div>
+        <div class="strip-divider"></div>
+        <div class="strip-item">
+          <span class="strip-num text-danger" id="rejectedCount">1</span>
+          <span class="strip-label">Rejected</span>
+        </div>
+      </div>
+
+      <!-- TABLE CARD -->
+      <div class="dash-card mt-3 reveal">
+
+        <!-- TOOLBAR -->
+        <div class="table-toolbar">
+          <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="text" id="tableSearch" placeholder="Search by title, ID, category...">
+            <button class="search-clear d-none" id="searchClear"><i class="bi bi-x-circle-fill"></i></button>
+          </div>
+
+          <div class="toolbar-controls">
+            <select class="form-select form-select-sm filter-select" id="statusFilter">
+              <option value="">All statuses</option>
+              <option value="pending">Pending</option>
+              <option value="in-review">In Review</option>
+              <option value="resolved">Resolved</option>
+              <option value="rejected">Rejected</option>
+            </select>
+
+            <select class="form-select form-select-sm filter-select" id="categoryFilter">
+              <option value="">All categories</option>
+              <option value="IT Services">IT Services</option>
+              <option value="Academics">Academics</option>
+              <option value="Facilities">Facilities</option>
+              <option value="Library">Library</option>
+              <option value="Finance">Finance</option>
+              <option value="Housing">Housing</option>
+              <option value="Other">Other</option>
+            </select>
+
+            <button class="btn btn-sm sort-btn" id="sortDateBtn" title="Sort by date">
+              <i class="bi bi-calendar-event me-1"></i>Date
+              <i class="bi bi-arrow-down-up sort-arrow" id="sortArrow"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- NO RESULTS STATE -->
+        <div class="empty-state d-none" id="emptyState">
+          <i class="bi bi-folder2-open"></i>
+          <h6>No complaints found</h6>
+          <p>Try adjusting your search or filter.</p>
+          <button class="btn btn-outline-primary btn-sm" id="clearFiltersBtn">Clear filters</button>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-responsive" id="tableWrap">
+          <table class="table dash-table ch-table align-middle" id="complaintTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th class="d-none d-md-table-cell">Category</th>
+                <th class="d-none d-lg-table-cell">Department</th>
+                <th class="d-none d-sm-table-cell">Date</th>
+                <th>Status</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="complaintTbody">
+              <!-- rows injected by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="table-footer" id="tableFooter">
+          <small class="text-muted" id="rowInfo">Showing 1–10 of 14</small>
+          <nav>
+            <ul class="pagination pagination-sm mb-0" id="pagination"></ul>
+          </nav>
+        </div>
+
+      </div>
+
+      <footer class="app-footer">
+        <small>&copy; <span id="year"></span> Software &amp; Web Development Student Portal</small>
+      </footer>
+    </main>
+  </div>
+</div><!-- /.app-shell -->
+
+
+<!-- ===== VIEW / DETAILS MODAL ===== -->
+<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content ch-modal">
+      <div class="modal-header ch-modal-header">
+        <div>
+          <h5 class="modal-title" id="viewModalLabel">Complaint Details</h5>
+          <small class="text-muted" id="modalTicketId">#0000</small>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-4 pb-4">
+        <div class="modal-status-bar mb-4" id="modalStatusBar">
+          <div class="msb-step done" id="msb1"><i class="bi bi-send-check"></i><span>Submitted</span></div>
+          <div class="msb-line" id="msbLine1"></div>
+          <div class="msb-step" id="msb2"><i class="bi bi-person-lines-fill"></i><span>Assigned</span></div>
+          <div class="msb-line" id="msbLine2"></div>
+          <div class="msb-step" id="msb3"><i class="bi bi-arrow-repeat"></i><span>In Review</span></div>
+          <div class="msb-line" id="msbLine3"></div>
+          <div class="msb-step" id="msb4"><i class="bi bi-check2-circle"></i><span>Closed</span></div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-6">
+            <div class="modal-meta-box">
+              <span class="meta-label"><i class="bi bi-tag me-1"></i>Category</span>
+              <span class="meta-value" id="modalCategory">—</span>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="modal-meta-box">
+              <span class="meta-label"><i class="bi bi-bank me-1"></i>Department</span>
+              <span class="meta-value" id="modalDept">—</span>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="modal-meta-box">
+              <span class="meta-label"><i class="bi bi-flag me-1"></i>Priority</span>
+              <span class="meta-value" id="modalPriority">—</span>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="modal-meta-box">
+              <span class="meta-label"><i class="bi bi-calendar3 me-1"></i>Submitted</span>
+              <span class="meta-value" id="modalDate">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-description-box mb-3">
+          <h6 class="mb-2"><i class="bi bi-text-left me-1 text-primary"></i>Description</h6>
+          <p id="modalDescription" class="mb-0">—</p>
+        </div>
+
+        <div id="modalAttachmentsWrap">
+          <h6 class="mb-2"><i class="bi bi-paperclip me-1 text-primary"></i>Attachments</h6>
+          <div id="modalAttachments" class="modal-attachments"></div>
+        </div>
+
+        <div class="modal-timeline mt-4" id="modalTimeline">
+          <h6 class="mb-3"><i class="bi bi-activity me-1 text-primary"></i>Activity</h6>
+          <div id="modalTimelineItems"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <span id="modalStatusBadge" class="me-auto"></span>
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="submit-complaint.html" class="btn btn-primary"><i class="bi bi-send-plus me-1"></i>New Complaint</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DELETE CONFIRM MODAL ===== -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content ch-modal">
+      <div class="modal-body text-center py-4 px-4">
+        <div class="delete-icon-wrap mb-3"><i class="bi bi-trash3-fill"></i></div>
+        <h6 class="mb-1">Delete complaint?</h6>
+        <p class="text-muted small mb-3">Ticket <strong id="deleteTicketId">#0000</strong> will be permanently removed and cannot be recovered.</p>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-secondary flex-fill" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn btn-danger flex-fill" id="confirmDeleteBtn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="/js/dashboard.js"></script>
+<script src="/js/complaint-history.js"></script>
+<script src="/js/script-3.js"></script>
+</body>
+</html>

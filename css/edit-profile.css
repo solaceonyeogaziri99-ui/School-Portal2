@@ -1,0 +1,102 @@
+/* ============================================
+   EDIT PROFILE PAGE
+   ============================================ */
+
+.page-heading h2{ margin:.3rem 0 .2rem; font-size:1.5rem; }
+
+/* ===== PHOTO CARD ===== */
+.photo-card{ padding-top:2rem; }
+.photo-upload-wrap{ position:relative; display:inline-block; }
+.photo-preview{
+  width:110px; height:110px; border-radius:50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:2rem; font-weight:700;
+  overflow:hidden; box-shadow: var(--shadow-md);
+  border:4px solid #fff;
+}
+.photo-preview img{ width:100%; height:100%; object-fit:cover; }
+
+.photo-edit-btn{
+  position:absolute; bottom:2px; right:2px;
+  width:34px; height:34px; border-radius:50%;
+  background:var(--primary); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.95rem; cursor:pointer; border:3px solid #fff;
+  transition: background .2s ease, transform .2s ease;
+}
+.photo-edit-btn:hover{ background:var(--primary-dark); transform:scale(1.08); }
+
+.photo-actions{ display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; }
+
+/* ===== STATUS LIST ===== */
+.status-list{ list-style:none; padding:0; margin:0; }
+.status-list li{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:.6rem 0; border-bottom:1px solid #f1f3f5; font-size:.86rem;
+}
+.status-list li:last-child{ border-bottom:none; }
+
+/* ===== INPUT GROUPS (reuse pattern from auth pages) ===== */
+.input-icon-group{ position:relative; }
+.input-icon-group > i{
+  position:absolute; left:14px; top:50%; transform:translateY(-50%);
+  color:var(--text-muted); font-size:1rem; pointer-events:none;
+}
+.input-icon-group .form-control,
+.input-icon-group .form-select{
+  padding-left:2.6rem;
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,0.1);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.input-icon-group .form-control:focus,
+.input-icon-group .form-select:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 .2rem rgba(13,110,253,0.12);
+}
+.input-icon-group .form-control:disabled{ background:#f1f3f5; color:var(--text-muted); }
+.input-icon-group .form-control.is-invalid,
+.input-icon-group .form-select.is-invalid{ border-color:#dc3545; background-image:none; }
+.input-icon-group .form-control.is-valid,
+.input-icon-group .form-select.is-valid{ border-color:#198754; background-image:none; }
+
+.toggle-password{
+  position:absolute; right:10px; top:50%; transform:translateY(-50%);
+  background:none; border:none; color:var(--text-muted); font-size:1rem;
+  padding:.2rem .3rem; cursor:pointer;
+}
+.toggle-password:hover{ color:var(--primary); }
+
+.invalid-feedback-custom{ display:none; color:#dc3545; font-size:.78rem; margin-top:.35rem; }
+.was-validated-field.invalid .invalid-feedback-custom{ display:block; }
+
+/* ===== FORM ACTIONS ===== */
+.form-actions{
+  display:flex; justify-content:flex-end; gap:.9rem; margin-top:1.6rem;
+}
+.save-btn{
+  display:flex; align-items:center; justify-content:center; gap:.4rem;
+  border-radius:10px; min-width:160px;
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.save-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 22px rgba(13,110,253,0.28); }
+.save-btn:disabled{ opacity:.85; transform:none; cursor:not-allowed; }
+
+#successAlert{ border-radius:12px; border:none; background:rgba(25,135,84,0.12); color:#157347; font-size:.88rem; }
+#successAlert.d-flex{ display:flex !important; }
+
+/* ===== DARK MODE ===== */
+body.dark-mode .photo-preview{ border-color:#1d2026; }
+body.dark-mode .status-list li{ border-color:#2a2e35; }
+body.dark-mode .input-icon-group .form-control,
+body.dark-mode .input-icon-group .form-select{
+  background:#15171c; color:#e9ecef; border-color:#2a2e35;
+}
+body.dark-mode .input-icon-group .form-control:disabled{ background:#1d2026; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 767.98px){
+  .form-actions{ flex-direction:column-reverse; }
+  .form-actions .btn{ width:100%; }
+}

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Complaints | Student Complaint & Profile Management Portal</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
+  <!-- Portal styles -->
+  <link rel="stylesheet" href="/css/manage-complaint.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Loader
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-ring"></div>
+  </div> -->
+
+  <!-- LOADER -->
+<div id="loader">
+  <div class="loader-inner">
+    <span class="loader-bracket">&lt;</span>
+    <span class="loader-dot"></span>
+    <span class="loader-bracket">/&gt;</span>
+  </div>
+</div>
+
+  <div class="app-shell">
+
+    <!-- Sidebar overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-brand">
+        <h1> </> </h1>
+        <div class="brand-text">
+          Admin Panel
+          <small>Complaint & Profile System</small>
+        </div>
+        <button class="sidebar-collapse-btn d-none d-lg-flex" id="sidebarCollapseBtn" aria-label="Collapse sidebar">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Overview</div>
+        <a href="admin-dashboard.html" class="nav-link"><i class="bi bi-grid-1x2"></i> <span>Dashboard</span></a>
+
+        <div class="nav-section-label">Management</div>
+        <a href="manage-students.html" class="nav-link"><i class="bi bi-people"></i> <span>Manage Students</span></a>
+        <a href="manage-complaints.html" class="nav-link active"><i class="bi bi-card-checklist"></i> <span>Manage Complaints</span></a>
+        <a href="reports.html" class="nav-link"><i class="bi bi-bar-chart-line"></i> <span>Reports</span></a>
+
+        <div class="nav-section-label">System</div>
+        <a href="notifications.html" class="nav-link"><i class="bi bi-bell"></i> <span>Notifications</span></a>
+        <a href="settings.html" class="nav-link"><i class="bi bi-gear"></i> <span>Settings</span></a>
+        <a href="admin-login.html" class="nav-link"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></a>
+      </nav>
+
+      <div class="sidebar-foot">
+        &copy; 2026 Student Complaint & Profile Management Portal
+      </div>
+    </aside>
+
+    <!-- Main area -->
+    <div class="main-area">
+
+      <!-- Topbar -->
+      <header class="topbar">
+        <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="Toggle menu">
+          <i class="bi bi-list"></i>
+        </button>
+
+        <div class="page-title">
+          Manage Complaints
+          <small>Review, resolve, and track student complaints</small>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle dark mode">
+            <i class="bi bi-moon-stars"></i>
+          </button>
+
+          <button class="icon-btn" aria-label="Notifications">
+            <i class="bi bi-bell"></i>
+            <span class="badge-dot"></span>
+          </button>
+
+          <div class="dropdown">
+            <button class="user-chip dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://i.pravatar.cc/64?img=12" alt="Admin avatar" />
+              <span>
+                <span class="chip-name d-block">Daniel Reyes</span>
+                <span class="chip-role">Administrator</span>
+              </span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+              <li><a class="dropdown-item" href="settings.html"><i class="bi bi-person me-2"></i>My Profile</a></li>
+              <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear me-2"></i>Settings</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item text-danger" href="admin-login.html"><i class="bi bi-box-arrow-right me-2"></i>Log Out</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="content-area">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+          <ol class="breadcrumb mb-0" style="font-size: 0.85rem;">
+            <li class="breadcrumb-item"><a href="admin-dashboard.html" class="text-decoration-none">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Manage Complaints</li>
+          </ol>
+        </nav>
+
+        <!-- Table card -->
+        <div class="card reveal-on-scroll">
+
+          <!-- Toolbar: search + filter -->
+          <div class="table-toolbar">
+            <div class="search-bar">
+              <i class="bi bi-search"></i>
+              <input type="text" id="complaintSearchInput" placeholder="Search by student, title, or complaint ID..." />
+            </div>
+
+            <div class="dropdown">
+              <button class="filter-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                <i class="bi bi-funnel"></i> Filter
+                <span class="filter-count" id="complaintFilterCount" style="display:none;">0</span>
+              </button>
+              <div class="dropdown-menu filter-menu shadow-sm" id="complaintFilterForm">
+                <div class="mb-3">
+                  <label class="form-label d-block">Category</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Lecturer Issues" name="catFilter" id="fCatLecturer">
+                    <label class="form-check-label" for="fCatLecturer" style="font-size:0.85rem;">Lecturer Issues</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Missing Results" name="catFilter" id="fCatResults">
+                    <label class="form-check-label" for="fCatResults" style="font-size:0.85rem;">Missing Results</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Portal Issues" name="catFilter" id="fCatPortal">
+                    <label class="form-check-label" for="fCatPortal" style="font-size:0.85rem;">Portal Issues</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Financial Issues" name="catFilter" id="fCatFinancial">
+                    <label class="form-check-label" for="fCatFinancial" style="font-size:0.85rem;">Financial Issues</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Hostel Issues" name="catFilter" id="fCatHostel">
+                    <label class="form-check-label" for="fCatHostel" style="font-size:0.85rem;">Hostel Issues</label>
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <label class="form-label d-block">Status</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Pending" name="cStatusFilter" id="fCStatusPending">
+                    <label class="form-check-label" for="fCStatusPending" style="font-size:0.85rem;">Pending</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="In Review" name="cStatusFilter" id="fCStatusReview">
+                    <label class="form-check-label" for="fCStatusReview" style="font-size:0.85rem;">In Review</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Resolved" name="cStatusFilter" id="fCStatusResolved">
+                    <label class="form-check-label" for="fCStatusResolved" style="font-size:0.85rem;">Resolved</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="Rejected" name="cStatusFilter" id="fCStatusRejected">
+                    <label class="form-check-label" for="fCStatusRejected" style="font-size:0.85rem;">Rejected</label>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary w-100" id="clearComplaintFilters">Clear filters</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="table-responsive">
+            <table class="table table-clean align-middle mb-0" id="complaintsTable">
+              <thead>
+                <tr>
+                  <th class="ps-4">Complaint ID</th>
+                  <th>Student Name</th>
+                  <th>Complaint Title</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th class="pe-4 text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <!-- Row 1 -->
+                <tr data-category="Missing Results" data-status="Pending" data-priority="High" data-dept="Computer Science"
+                    data-title="Missing midterm marks" data-student="Amara Okoye" data-email="amara.okoye@university.edu"
+                    data-avatar="https://i.pravatar.cc/64?img=32"
+                    data-description="I sat for the CS301 midterm on July 10th, but my marks are still missing from the portal three weeks later. Two classmates who sat the same exam already have their results posted. I have emailed the course coordinator twice without a reply.">
+                  <td class="ps-4">CMP-2041</td>
+                  <td>
+                    <div class="student-cell">
+                      <div class="avatar-initials">AO</div>
+                      <div><div class="student-name">Amara Okoye</div></div>
+                    </div>
+                  </td>
+                  <td>Missing midterm marks</td>
+                  <td>Missing Results</td>
+                  <td>Jul 29, 2026</td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="status-dropdown-toggle dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        <span class="status-badge status-pending">Pending</span>
+                      </button>
+                      <ul class="dropdown-menu status-dropdown-menu shadow-sm">
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Pending"><span class="status-dot" style="background:#997404;"></span>Pending</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="In Review"><span class="status-dot" style="background:#0d6efd;"></span>In Review</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Resolved"><span class="status-dot" style="background:#146c43;"></span>Resolved</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Rejected"><span class="status-dot" style="background:#b02a37;"></span>Rejected</button></li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td class="pe-4">
+                    <div class="row-actions">
+                      <button type="button" class="btn-icon btn-view" title="View details"><i class="bi bi-eye"></i></button>
+                      <button type="button" class="btn-icon btn-resolve" title="Mark resolved"><i class="bi bi-check2"></i></button>
+                      <button type="button" class="btn-icon btn-delete" title="Delete"><i class="bi bi-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 2 -->
+                <tr data-category="Portal Issues" data-status="In Review" data-priority="Medium" data-dept="IT Services"
+                    data-title="Portal login errors" data-student="Liam Chen" data-email="liam.chen@university.edu"
+                    data-avatar="https://i.pravatar.cc/64?img=5" data-evidence="login-error-screenshot.png"
+                    data-description="I keep getting logged out of the student portal every few minutes since the last update. This has happened on both my laptop and phone browser. It's making it hard to check my results or submit assignments on time.">
+                  <td class="ps-4">CMP-2042</td>
+                  <td>
+                    <div class="student-cell">
+                      <div class="avatar-initials">LC</div>
+                      <div><div class="student-name">Liam Chen</div></div>
+                    </div>
+                  </td>
+                  <td>Portal login errors</td>
+                  <td>Portal Issues</td>
+                  <td>Jul 28, 2026</td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="status-dropdown-toggle dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        <span class="status-badge status-in-progress">In Review</span>
+                      </button>
+                      <ul class="dropdown-menu status-dropdown-menu shadow-sm">
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Pending"><span class="status-dot" style="background:#997404;"></span>Pending</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="In Review"><span class="status-dot" style="background:#0d6efd;"></span>In Review</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Resolved"><span class="status-dot" style="background:#146c43;"></span>Resolved</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Rejected"><span class="status-dot" style="background:#b02a37;"></span>Rejected</button></li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td class="pe-4">
+                    <div class="row-actions">
+                      <button type="button" class="btn-icon btn-view" title="View details"><i class="bi bi-eye"></i></button>
+                      <button type="button" class="btn-icon btn-resolve" title="Mark resolved"><i class="bi bi-check2"></i></button>
+                      <button type="button" class="btn-icon btn-delete" title="Delete"><i class="bi bi-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 3 -->
+                <tr data-category="Hostel Issues" data-status="Resolved" data-priority="Low" data-dept="Hostel Management"
+                    data-title="Hostel room maintenance" data-student="Priya Nair" data-email="priya.nair@university.edu"
+                    data-avatar="https://i.pravatar.cc/64?img=25" data-evidence="leaking-tap-photo.jpg,room-b204-photo.jpg"
+                    data-description="The bathroom tap in room B204 has been leaking for over a week, and the maintenance request I filed on the hostel app has not been actioned. Water is starting to pool near the electrical socket.">
+                  <td class="ps-4">CMP-2043</td>
+                  <td>
+                    <div class="student-cell">
+                      <div class="avatar-initials">PN</div>
+                      <div><div class="student-name">Priya Nair</div></div>
+                    </div>
+                  </td>
+                  <td>Hostel room maintenance</td>
+                  <td>Hostel Issues</td>
+                  <td>Jul 26, 2026</td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="status-dropdown-toggle dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        <span class="status-badge status-resolved">Resolved</span>
+                      </button>
+                      <ul class="dropdown-menu status-dropdown-menu shadow-sm">
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Pending"><span class="status-dot" style="background:#997404;"></span>Pending</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="In Review"><span class="status-dot" style="background:#0d6efd;"></span>In Review</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Resolved"><span class="status-dot" style="background:#146c43;"></span>Resolved</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Rejected"><span class="status-dot" style="background:#b02a37;"></span>Rejected</button></li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td class="pe-4">
+                    <div class="row-actions">
+                      <button type="button" class="btn-icon btn-view" title="View details"><i class="bi bi-eye"></i></button>
+                      <button type="button" class="btn-icon btn-resolve" title="Mark resolved"><i class="bi bi-check2"></i></button>
+                      <button type="button" class="btn-icon btn-delete" title="Delete"><i class="bi bi-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 4 -->
+                <tr data-category="Financial Issues" data-status="In Review" data-priority="Urgent" data-dept="Accounting"
+                    data-title="Tuition refund not processed" data-student="Diego Alvarez" data-email="diego.alvarez@university.edu"
+                    data-avatar="https://i.pravatar.cc/64?img=41" data-evidence="refund-receipt.pdf,bank-statement.pdf"
+                    data-description="I withdrew from ECON210 within the refund window on July 5th and was told the prorated tuition refund would be processed within 10 business days. It has now been over three weeks with no refund and no update from the finance office.">
+                  <td class="ps-4">CMP-2044</td>
+                  <td>
+                    <div class="student-cell">
+                      <div class="avatar-initials">DA</div>
+                      <div><div class="student-name">Diego Alvarez</div></div>
+                    </div>
+                  </td>
+                  <td>Tuition refund not processed</td>
+                  <td>Financial Issues</td>
+                  <td>Jul 25, 2026</td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="status-dropdown-toggle dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        <span class="status-badge status-in-progress">In Review</span>
+                      </button>
+                      <ul class="dropdown-menu status-dropdown-menu shadow-sm">
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Pending"><span class="status-dot" style="background:#997404;"></span>Pending</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="In Review"><span class="status-dot" style="background:#0d6efd;"></span>In Review</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Resolved"><span class="status-dot" style="background:#146c43;"></span>Resolved</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Rejected"><span class="status-dot" style="background:#b02a37;"></span>Rejected</button></li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td class="pe-4">
+                    <div class="row-actions">
+                      <button type="button" class="btn-icon btn-view" title="View details"><i class="bi bi-eye"></i></button>
+                      <button type="button" class="btn-icon btn-resolve" title="Mark resolved"><i class="bi bi-check2"></i></button>
+                      <button type="button" class="btn-icon btn-delete" title="Delete"><i class="bi bi-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Row 5 -->
+                <tr data-category="Lecturer Issues" data-status="Rejected" data-priority="Medium" data-dept="Computer Science"
+                    data-title="Lecturer attendance dispute" data-student="Sarah Blake" data-email="sarah.blake@university.edu"
+                    data-avatar="https://i.pravatar.cc/64?img=48"
+                    data-description="I was marked absent for the July 18th lecture despite signing the physical attendance sheet. I've raised this with the lecturer directly but was told the sheet had already been submitted and could not be corrected.">
+                  <td class="ps-4">CMP-2045</td>
+                  <td>
+                    <div class="student-cell">
+                      <div class="avatar-initials">SB</div>
+                      <div><div class="student-name">Sarah Blake</div></div>
+                    </div>
+                  </td>
+                  <td>Lecturer attendance dispute</td>
+                  <td>Lecturer Issues</td>
+                  <td>Jul 23, 2026</td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="status-dropdown-toggle dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        <span class="status-badge status-rejected">Rejected</span>
+                      </button>
+                      <ul class="dropdown-menu status-dropdown-menu shadow-sm">
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Pending"><span class="status-dot" style="background:#997404;"></span>Pending</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="In Review"><span class="status-dot" style="background:#0d6efd;"></span>In Review</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Resolved"><span class="status-dot" style="background:#146c43;"></span>Resolved</button></li>
+                        <li><button type="button" class="dropdown-item status-option" data-status-value="Rejected"><span class="status-dot" style="background:#b02a37;"></span>Rejected</button></li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td class="pe-4">
+                    <div class="row-actions">
+                      <button type="button" class="btn-icon btn-view" title="View details"><i class="bi bi-eye"></i></button>
+                      <button type="button" class="btn-icon btn-resolve" title="Mark resolved"><i class="bi bi-check2"></i></button>
+                      <button type="button" class="btn-icon btn-delete" title="Delete"><i class="bi bi-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Table footer: result count -->
+          <div class="table-footer">
+            <div class="result-count" id="complaintResultCount">Showing 5 of 5 complaints</div>
+            <nav aria-label="Complaints pagination">
+              <ul class="pagination mb-0">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="Previous"><i class="bi bi-chevron-left"></i></a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Next"><i class="bi bi-chevron-right"></i></a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer-note text-center">
+        &copy; 2026 Student Complaint & Profile Management Portal. All rights reserved.
+      </footer>
+    </div>
+  </div>
+
+  <!-- ============== Complaint Details Modal ============== -->
+  <div class="modal fade detail-modal" id="complaintDetailsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title mb-1"><span id="detailTitle">Complaint Title</span></h5>
+            <span class="text-muted" style="font-size: 0.82rem;">Complaint ID: <span id="detailComplaintId">—</span></span>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="detail-meta-grid">
+            <div>
+              <div class="meta-label">Category</div>
+              <div class="meta-value" id="detailCategory">—</div>
+            </div>
+            <div>
+              <div class="meta-label">Priority</div>
+              <div class="meta-value" id="detailPriority">—</div>
+            </div>
+            <div>
+              <div class="meta-label">Department</div>
+              <div class="meta-value" id="detailDepartment">—</div>
+            </div>
+            <div>
+              <div class="meta-label">Date Submitted</div>
+              <div class="meta-value" id="detailDate">—</div>
+            </div>
+          </div>
+
+          <div class="detail-student-card">
+            <img id="detailStudentAvatar" src="" alt="Student avatar" class="avatar-sm" style="width:44px;height:44px;" />
+            <div>
+              <div class="fw-semibold" id="detailStudentName" style="font-size:0.92rem;">—</div>
+              <div class="text-muted" id="detailStudentEmail" style="font-size:0.8rem;">—</div>
+            </div>
+          </div>
+
+          <div class="detail-section-title">Description</div>
+          <div class="detail-description" id="detailDescription">—</div>
+
+          <div class="detail-section-title">Evidence</div>
+          <div class="detail-evidence-list" id="detailEvidenceList"></div>
+
+          <div class="detail-section-title mt-4">Update Status</div>
+          <select class="form-select" id="detailStatusSelect">
+            <option>Pending</option>
+            <option>In Review</option>
+            <option>Resolved</option>
+            <option>Rejected</option>
+          </select>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveDetailStatusBtn"><i class="bi bi-check2 me-1"></i>Save Status</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== Delete Confirmation Modal ============== -->
+  <div class="modal fade" id="deleteComplaintModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center pt-4">
+          <div class="delete-modal-icon"><i class="bi bi-exclamation-triangle"></i></div>
+          <h5 class="fw-semibold mb-2">Delete this complaint?</h5>
+          <p class="text-muted mb-0">
+            You're about to permanently remove "<strong id="deleteComplaintTitle">this complaint</strong>"
+            from the system. This action cannot be undone.
+          </p>
+        </div>
+        <div class="modal-footer justify-content-center border-top-0 pb-4">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteComplaintBtn"><i class="bi bi-trash me-1"></i>Delete Complaint</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Portal script -->
+  <script src="/js/manage-complaint.js"></script>
+  <script src="/js/script-3.js"></script>
+  <script src="/js/script.js"></script>
+  <script src="/js/complaint-history.js"></script>
+</body>
+</html>

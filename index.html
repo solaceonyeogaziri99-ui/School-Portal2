@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software &amp; Web Development Student Portal</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-inner">
+    <span class="loader-bracket">&lt;</span>
+    <span class="loader-dot"></span>
+    <span class="loader-bracket">/&gt;</span>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top main-navbar" id="mainNavbar">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <span class="brand-mark">&lt;SWD<span class="brand-accent">/</span>&gt;</span>
+      <span class="brand-text">Student Portal</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-label="Toggle navigation">
+      <i class="bi bi-list"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navContent">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+      <div class="d-flex gap-2 nav-buttons">
+        <a href="login.html" class="btn btn-outline-primary btn-sm px-3">Login</a>
+        <a href="register.html" class="btn btn-primary btn-sm px-3">Register</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero-section" id="home">
+  <div class="hero-bg-grid"></div>
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <span class="eyebrow"><span class="eyebrow-dot"></span>Department of Computer Science</span>
+        <h1 class="hero-heading">Every complaint, <span class="text-gradient">tracked</span> like a commit.</h1>
+        <p class="hero-subtext">One portal to register, log issues, and follow them through to resolution — built for the way software students actually work. Transparent status, full history, zero guesswork.</p>
+        <div class="hero-cta d-flex flex-wrap gap-3">
+          <a href="#" class="btn btn-primary btn-lg px-4">Get Started <i class="bi bi-arrow-right ms-1"></i></a>
+          <a href="#" class="btn btn-outline-dark btn-lg px-4">Student Login</a>
+        </div>
+        <div class="hero-trust d-flex align-items-center gap-3 mt-4">
+          <div class="avatar-stack">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <small class="text-muted">Trusted by 25+ students across 5 departments</small>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="code-window">
+          <div class="code-window-bar">
+            <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            <span class="code-window-title">complaint.log</span>
+          </div>
+          <div class="code-window-body">
+<pre><code><span class="c-muted">$</span> <span class="c-key">portal</span> submit <span class="c-str">--issue</span> <span class="c-str">"Lab PC won't boot"</span>
+<span class="c-ok">✓ complaint #2291 created</span>
+
+<span class="c-muted">$</span> <span class="c-key">portal</span> status <span class="c-str">#2291</span>
+<span class="c-comment">// tracking history</span>
+<span class="c-line"><span class="badge-pill badge-open">open</span> submitted to IT Services</span>
+<span class="c-line"><span class="badge-pill badge-progress">in review</span> assigned to technician</span>
+<span class="c-line"><span class="badge-pill badge-resolved">resolved</span> closed in 1d 4h</span>
+
+<span class="c-muted">$</span> <span class="cursor-blink">▍</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- FEATURES -->
+<section class="features-section py-5" id="features">
+  <div class="container py-5">
+    <div class="text-center section-heading reveal">
+      <span class="section-eyebrow">What's inside</span>
+      <h2>Built around the student workflow</h2>
+      <p class="text-muted">Six core modules cover everything from your first login to a closed ticket.</p>
+    </div>
+    <div class="row g-4 mt-3">
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-send-fill"></i></div>
+          <h5>Complaint Submission</h5>
+          <p>File an issue in under a minute with category, priority, and attachment support.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-grid-1x2-fill"></i></div>
+          <h5>Student Dashboard</h5>
+          <p>A single view of open tickets, profile status, and recent notifications.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-clock-history"></i></div>
+          <h5>Complaint Tracking</h5>
+          <p>Live status updates from "Open" to "In Review" to "Resolved" — no follow-up emails needed.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-shield-lock-fill"></i></div>
+          <h5>Secure Login</h5>
+          <p>Role-based access for students and admins, with password recovery built in.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-eye-fill"></i></div>
+          <h5>Admin Monitoring</h5>
+          <p>Staff get a real-time queue of incoming complaints sorted by urgency and department.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-person-vcard-fill"></i></div>
+          <h5>Profile Management</h5>
+          <p>Keep contact details, enrollment info, and photo up to date in one editable form.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section py-5" id="about">
+  <div class="container py-5">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6 reveal">
+        <div class="about-visual">
+          <div class="about-card-stat">
+            <i class="bi bi-graph-up-arrow"></i>
+            <div>
+              <strong>92%</strong>
+              <span>resolved within 48 hours</span>
+            </div>
+          </div>
+          <div class="about-visual-grid">
+            <i class="bi bi-mortarboard-fill"></i>
+            <i class="bi bi-laptop"></i>
+            <i class="bi bi-code-slash"></i>
+            <i class="bi bi-terminal"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 reveal">
+        <span class="section-eyebrow">Why this portal</span>
+        <h2 class="mb-3">No more lost emails or forgotten follow-ups</h2>
+        <p class="text-muted">The Software &amp; Web Development Student Portal replaces scattered emails and walk-in requests with a single, auditable record. Every complaint is timestamped, assigned, and visible to the student who filed it — start to finish.</p>
+        <ul class="about-list">
+          <li><i class="bi bi-check-circle-fill"></i> One account for registration, complaints, and profile updates</li>
+          <li><i class="bi bi-check-circle-fill"></i> Department admins respond inside the same thread</li>
+          <li><i class="bi bi-check-circle-fill"></i> Full history retained for every resolved ticket</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATISTICS -->
+<section class="stats-section py-5">
+  <div class="container py-4">
+    <div class="row text-center g-4">
+      <div class="col-6 col-lg-3 reveal">
+        <div class="stat-box">
+          <h3 class="counter" data-target="25">0</h3>
+          <p>Total Students</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3 reveal">
+        <div class="stat-box">
+          <h3 class="counter" data-target="120">0</h3>
+          <p>Complaints Resolved</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3 reveal">
+        <div class="stat-box">
+          <h3 class="counter" data-target="15">0</h3>
+          <p>Active Users</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3 reveal">
+        <div class="stat-box">
+          <h3 class="counter" data-target="5">0</h3>
+          <p>Departments</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section py-5">
+  <div class="container py-5">
+    <div class="text-center section-heading reveal">
+      <span class="section-eyebrow">The workflow</span>
+      <h2>Three commits to resolution</h2>
+      <p class="text-muted">Each complaint moves through the portal the way a change moves through version control.</p>
+    </div>
+    <div class="row g-4 mt-3 how-steps">
+      <div class="col-md-4 reveal">
+        <div class="how-card">
+          <span class="how-commit">commit a1</span>
+          <div class="how-icon"><i class="bi bi-person-plus-fill"></i></div>
+          <h5>Register</h5>
+          <p>Create your student account with your university ID and department.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="how-card">
+          <span class="how-commit">commit b2</span>
+          <div class="how-icon"><i class="bi bi-pencil-square"></i></div>
+          <h5>Submit Complaint</h5>
+          <p>Describe the issue, attach evidence, and assign a priority level.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="how-card">
+          <span class="how-commit">commit c3</span>
+          <div class="how-icon"><i class="bi bi-check2-circle"></i></div>
+          <h5>Track Complaint</h5>
+          <p>Watch status change live and get notified the moment it's resolved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section py-5">
+  <div class="container py-5">
+    <div class="text-center section-heading reveal">
+      <span class="section-eyebrow">Student feedback</span>
+      <h2>What students are saying</h2>
+    </div>
+    <div class="row g-4 mt-3">
+      <div class="col-md-4 reveal">
+        <div class="testimonial-card">
+          <i class="bi bi-quote quote-icon"></i>
+          <p>"I filed a lab equipment complaint and had a technician assigned within the hour. I could actually see the status change."</p>
+          <div class="testimonial-author">
+            <div class="avatar-circle">AP</div>
+            <div>
+              <strong>Alex Precious</strong>
+              <span>ND2, Computer Science</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="testimonial-card">
+          <i class="bi bi-quote quote-icon"></i>
+          <p>"Updating my profile and tracking two open complaints from the same dashboard saved me a dozen emails."</p>
+          <div class="testimonial-author">
+            <div class="avatar-circle">EC</div>
+            <div>
+              <strong>Evans Chiemeka</strong>
+              <span>HND1, Software And Web Development</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="testimonial-card">
+          <i class="bi bi-quote quote-icon"></i>
+          <p>"As a class rep, the admin queue view makes it easy to see what's piling up before it becomes a bigger problem."</p>
+          <div class="testimonial-author">
+            <div class="avatar-circle">D</div>
+            <div>
+              <strong>Destiny</strong>
+              <span> HND1, Software And Web Development</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section py-5">
+  <div class="container py-5">
+    <div class="text-center section-heading reveal">
+      <span class="section-eyebrow">Questions</span>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-lg-9 reveal">
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                Who can register on the portal?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Any currently enrolled student with a valid university ID can create an account using their official university email address.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                How long does a complaint take to resolve?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Most complaints are reviewed within 24 hours and resolved within 48 hours, depending on department and priority level.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                Can I edit a complaint after submitting it?
+              </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">You can add comments or attachments to an open complaint at any time. The original description stays locked to preserve the record.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                Is my information visible to other students?
+              </button>
+            </h2>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">No. Complaint and profile data is only visible to you and the relevant department administrators.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section py-5" id="contact">
+  <div class="container py-5">
+    <div class="text-center section-heading reveal">
+      <span class="section-eyebrow">Get in touch</span>
+      <h2>Need help before you register?</h2>
+    </div>
+    <div class="row g-4 mt-3">
+      <div class="col-lg-6 reveal">
+        <form class="contact-form">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" placeholder="Jane Doe">
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label">University Email</label>
+              <input type="email" class="form-control" placeholder="jane@university.edu">
+            </div>
+            <div class="col-12">
+              <label class="form-label">Subject</label>
+              <input type="text" class="form-control" placeholder="How can we help?">
+            </div>
+            <div class="col-12">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" rows="4" placeholder="Write your message..."></textarea>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary px-4">Send Message <i class="bi bi-send ms-1"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-6 reveal">
+        <div class="map-placeholder">
+          <i class="bi bi-geo-alt-fill"></i>
+          <span>Campus location map</span>
+        </div>
+        <div class="contact-info-row">
+          <div><i class="bi bi-envelope-fill"></i> support@swdportal.edu</div>
+          <div><i class="bi bi-telephone-fill"></i> +1 (555) 010-2030</div>
+        </div>
+        <div class="social-icons">
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-twitter-x"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <a class="navbar-brand d-inline-block mb-3" href="index.html">
+          <span class="brand-mark">&lt;SWD<span class="brand-accent">/</span>&gt;</span>
+          <span class="brand-text text-white">Student Portal</span>
+        </a>
+        <p class="text-secondary">A single home for student complaints, tracking, and profile management.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Quick Links</h6>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Account</h6>
+        <ul class="footer-links">
+          <li><a href="#">Student Login</a></li>
+          <li><a href="#">Register</a></li>
+          <li><a href="#">Admin Login</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h6>Contact</h6>
+        <ul class="footer-links">
+          <li><i class="bi bi-geo-alt me-2"></i>Department of Computer Science, Main Campus</li>
+          <li><i class="bi bi-envelope me-2"></i>support@swdportal.edu</li>
+          <li><i class="bi bi-telephone me-2"></i>+1 (555) 010-2030</li>
+        </ul>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <small class="text-secondary">&copy; <span id="year"></span> Software &amp; Web Development Student Portal. All rights reserved.</small>
+      <div class="social-icons">
+        <a href="#"><i class="bi bi-facebook"></i></a>
+        <a href="#"><i class="bi bi-twitter-x"></i></a>
+        <a href="#"><i class="bi bi-instagram"></i></a>
+        <a href="#"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js"></script>
+<script src="/js/script-3.js"></script>
+</body>
+</html>
