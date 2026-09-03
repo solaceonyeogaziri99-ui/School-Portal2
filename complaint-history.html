@@ -32,7 +32,7 @@
   <!-- SIDEBAR -->
   <aside class="app-sidebar" id="appSidebar">
     <div class="sidebar-brand">
-      <a href="dashboard.html" class="navbar-brand">
+      <a href="dashboard.php" class="navbar-brand">
         <span class="brand-mark">&lt;SWD<span class="brand-accent">/</span>&gt;</span>
         <span class="brand-text">Student Portal</span>
       </a>
@@ -43,9 +43,9 @@
       <div><strong>Jane Doe</strong><span>CSC/2021/045</span></div>
     </div>
     <nav class="sidebar-nav">
-      <a href="dashboard.html"        class="sidebar-link"><i class="bi bi-grid-1x2-fill"></i><span>Dashboard</span></a>
-      <a href="edit-profile.html"     class="sidebar-link"><i class="bi bi-person-vcard"></i><span>Edit Profile</span></a>
-      <a href="submit-complaint.html" class="sidebar-link"><i class="bi bi-send-plus"></i><span>Submit Complaint</span></a>
+      <a href="dashboard.php"        class="sidebar-link"><i class="bi bi-grid-1x2-fill"></i><span>Dashboard</span></a>
+      <a href="edit-profile.php"     class="sidebar-link"><i class="bi bi-person-vcard"></i><span>Edit Profile</span></a>
+      <a href="complaint.php" class="sidebar-link"><i class="bi bi-send-plus"></i><span>Submit Complaint</span></a>
       <a href="complaint-history.html" class="sidebar-link active"><i class="bi bi-clock-history"></i><span>Complaint History</span></a>
       <a href="notifications.html"    class="sidebar-link">
         <i class="bi bi-bell"></i><span>Notifications</span>
@@ -92,7 +92,7 @@
             <i class="bi bi-chevron-down small"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="edit-profile.html"><i class="bi bi-person me-2"></i>My Profile</a></li>
+            <li><a class="dropdown-item" href="edit-profile.php"><i class="bi bi-person me-2"></i>My Profile</a></li>
             <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear me-2"></i>Settings</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item text-danger" href="login.html"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
@@ -111,7 +111,7 @@
           <h2>Complaint History</h2>
           <p class="text-muted mb-0">A full log of every ticket you've filed — searchable, filterable, and sortable.</p>
         </div>
-        <a href="submit-complaint.html" class="btn btn-primary">
+        <a href="complaint.php" class="btn btn-primary">
           <i class="bi bi-plus-lg me-1"></i> New Complaint
         </a>
       </div>
@@ -295,7 +295,7 @@
       <div class="modal-footer">
         <span id="modalStatusBadge" class="me-auto"></span>
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-        <a href="submit-complaint.html" class="btn btn-primary"><i class="bi bi-send-plus me-1"></i>New Complaint</a>
+        <a href="complaint.php" class="btn btn-primary"><i class="bi bi-send-plus me-1"></i>New Complaint</a>
       </div>
     </div>
   </div>

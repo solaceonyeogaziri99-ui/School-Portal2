@@ -58,10 +58,10 @@ const writeStorage = (key, value) => {
 
 /* ---------------------------------------------------------------------- *
  * 2. Loader screen
- * Hides #pageLoader once the page (including images) has fully loaded.
+ * Hides #loader once the page (including images) has fully loaded.
  * ---------------------------------------------------------------------- */
 const initLoader = () => {
-  const loader = qs("#pageLoader");
+  const loader = qs("#loader");
   if (!loader) return;
 
   const hideLoader = () => setTimeout(() => loader.classList.add("loaded"), 300);

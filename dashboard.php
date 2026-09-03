@@ -67,7 +67,7 @@ $user = $result->fetch_assoc();
   <!-- SIDEBAR -->
   <aside class="app-sidebar" id="appSidebar">
     <div class="sidebar-brand">
-      <a href="dashboard.html" class="navbar-brand">
+      <a href="dashboard.php" class="navbar-brand">
         <span class="brand-mark">&lt;SWD<span class="brand-accent">/</span>&gt;</span>
         <span class="brand-text">Student Portal</span>
       </a>
@@ -168,7 +168,7 @@ $user = $result->fetch_assoc();
             <i class="bi bi-chevron-down small"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="edit-profile.html"><i class="bi bi-person me-2"></i>My Profile</a></li>
+            <li><a class="dropdown-item" href="edit-profile.php"><i class="bi bi-person me-2"></i>My Profile</a></li>
             <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear me-2"></i>Settings</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item text-danger" href="backend/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
@@ -187,7 +187,7 @@ $user = $result->fetch_assoc();
           <h2>Hello, <?php echo $user["full_name"]; ?> 👋</h2>
           <p>You have <strong>2 complaints</strong> currently in progress. Here's what's happening today.</p>
         </div>
-        <a href="submit-complaint.html" class="btn btn-light btn-lg">
+        <a href="complaint.php" class="btn btn-light btn-lg">
           <i class="bi bi-plus-lg me-1"></i> New Complaint
         </a>
       </div>
@@ -212,7 +212,7 @@ $user = $result->fetch_assoc();
               <li><i class="bi bi-telephone"></i><?php echo $user["phone"]; ?></li>
               <li><i class="bi bi-bank"></i><?php echo $user["department"]; ?></li>
             </ul>
-            <a href="edit-profile.html" class="btn btn-outline-primary w-100 mt-2">
+              <a href="edit-profile.php" class="btn btn-outline-primary w-100 mt-2">
               <i class="bi bi-pencil-square me-1"></i> Edit Profile
             </a>
           </div>
@@ -346,10 +346,10 @@ $user = $result->fetch_assoc();
           <div class="dash-card mt-4">
             <h5 class="mb-3">Quick Actions</h5>
             <div class="quick-actions-grid">
-              <a href="submit-complaint.html" class="quick-action">
+              <a href="complaint.php" class="quick-action">
                 <i class="bi bi-send-plus"></i> Submit Complaint
               </a>
-              <a href="edit-profile.html" class="quick-action">
+              <a href="edit-profile.php" class="quick-action">
                 <i class="bi bi-person-vcard"></i> Update Profile
               </a>
               <a href="complaint-history.html" class="quick-action">
